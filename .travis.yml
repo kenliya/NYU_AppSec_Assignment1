@@ -1,7 +1,7 @@
 os: windows
 language: c
-before_install:
-  - test -n $CC && unset CC
+#before_install:
+#  - test -n $CC && unset CC
 install: make
 <<<<<<< HEAD
 complier: gcc
