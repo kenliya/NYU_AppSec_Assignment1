@@ -1,6 +1,5 @@
 os: linux
 language: c
-#before_install:
-#  - test -n $CC && unset CC
 install: make
-complier: gcc
+complier: gcc 
+script: ./spell_check test1.txt
