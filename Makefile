@@ -1,4 +1,4 @@
-default: test
+default: prog
 
 get-deps:
 	# Assuming Debian or Ubuntu here

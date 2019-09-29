@@ -5,12 +5,12 @@
 #include <ctype.h>
 #include <check.h>
 #include "dictionary.h"
-#include "dictionary.c"
+//#include "dictionary.c"
 //#include "spell.c"
 #define DICTIONARY "wordlist.txt"
 #define TESTDICT "test_worlist.txt"
 
-
+/*
 int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
 {
 	int num_misspelled = 0;
@@ -112,8 +112,9 @@ bool check_word(const char* word, hashmap_t hashtable[])
 	}
 	return 0;
 }
+*/
 
-int main()
+int main(int argc, char *argv[])
 {
 	hashmap_t hashtable[HASH_SIZE];
     load_dictionary(DICTIONARY, hashtable);
@@ -124,9 +125,15 @@ int main()
     printf("%d\n",check_word(punctuation_word_2, hashtable));
 	*/
 	char *misspelled[100];
-	FILE *fp = fopen("wordlist_1.txt", "r");
+	FILE *fp = fopen(argv[1], "r");
 	
 	int num_misspelled = check_words(fp, hashtable, misspelled);
+	printf("number of misspelled words: %d\n",num_misspelled);
+	printf("misspelled words are:\n");
+	for (int i = 0; i < num_misspelled; i++)
+	{
+		printf("%s\n", misspelled[i]);
+	}
 	return 0;
 }
 
