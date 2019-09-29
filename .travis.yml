@@ -3,4 +3,8 @@ language: c
 before_install:
   - test -n $CC && unset CC
 #install: make
+<<<<<<< HEAD
 complier: gcc
+=======
+complier: gcc
+>>>>>>> 13d9972ed30bb78561372d6b05c9aa0061f93d7e

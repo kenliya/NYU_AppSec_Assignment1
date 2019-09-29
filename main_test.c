@@ -3,20 +3,105 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <check.h>
 #include "dictionary.h"
-//#include "dictionary.c"
+#include "dictionary.c"
+//#include "spell.c"
+#define DICTIONARY "wordlist.txt"
+#define TESTDICT "test_worlist.txt"
 
+/*
+int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
+{
+	int num_misspelled = 0;
+	while(!feof(fp)) {
+		char* line;
+		line = malloc (sizeof(char));
+		fscanf(fp, "%s, %[^\n]", line);
+		printf("line: %s\n", line);
+		if( feof(fp) ) 
+		{ 
+			break ;
+		}
+		//split line into words (detect space, comma, etc)
+		char* word;
+		word = strtok(line, " ,.-");
+		printf("word from line: %s\n", word);
+		while (word!=NULL)
+		{
+			//if it is misspelled
+			for (; *word; ++word)
+			{
+				*word = tolower(*word);
+			}
+			printf ("word from line: %s\n", word);
+			if (!check_word(word, hashtable))
+			{
+				//append word to misspelled
+				for (int i = 0; i < num_misspelled ; i++)
+				{
+					misspelled[i] = word;
+				}
+				//increase num of misspelled
+				num_misspelled ++;
+			}
+			word = strtok (NULL, " ,.-");
+		}
+	}
+	return num_misspelled;
+	
+}
+*/
+/*
+int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
+{
+	int num_misspelled = 0;
+	while(!feof(fp)) 
+	{
+		char* word;
+		word = malloc (sizeof(char));
+		fscanf(fp, "%s, %[^\n]", word);
+		printf("word: %s\n", word);
+			
+		if( feof(fp) ) 
+		{ 
+			break ;
+		}
+		
+		char* change_case = word;
+		
+		for (; *change_case; ++change_case)
+		{
+			//printf(word);
+			*change_case = tolower(*change_case);
+		}
+		
+		
+		printf("word_lower: %s\n", word);
+		if (!check_word(word, hashtable))
+			{
+				//append word to misspelled
+				for (int i = 0; i < num_misspelled ; i++)
+				{
+					misspelled[i] = word;
+				}
+				//increase num of misspelled
+				num_misspelled ++;
+			}
+	}
+	return num_misspelled;
+}
+*/
 int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
 {
 	int num_misspelled = 0;
 	
 	char *line = malloc(sizeof(char)*BUFSIZ);
-	//printf("Buffer size: %d\n", BUFSIZ);
-	//size_t len = 0;
-	//ssize_t read;
+	printf("Buffer size: %d\n", BUFSIZ);
+	size_t len = 0;
+	ssize_t read;
 	
 	unsigned int ch, i;
-	
 	while (!feof(fp))
 	{
 		for (i =0; i< BUFSIZ && (((ch = fgetc(fp)) != EOF) && (ch != '\n')); i ++)
@@ -25,22 +110,29 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
 			line[i] = ch;
 		}
 		//line[i] = "\0";
-		//printf("Line: %s\n", line);
-
+		printf("Line: %s\n", line);
+		/*
+		while (fgetc(fp) != EOF)
+		{
+			word
+		}
+		*/
 		char *word = NULL;
 		
 		word = strtok(line, " ,.-\n\r");
 		
 		while (word != NULL)
 		{
-			//printf ("word from line: %s\n", word);
+			printf ("word from line: %s\n", word);
 			
 			//if it is misspelled
 			if (!check_word(word, hashtable))
 			{
 				//append word to misspelled
-				misspelled[num_misspelled] = word;
-				
+				for (int i = 0; i < num_misspelled ; i++)
+				{
+					misspelled[i] = word;
+				}
 				//increase num of misspelled
 				num_misspelled ++;
 			}
@@ -48,7 +140,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
 		}
 	
 		//free(line);
-		free(word);
+		//free(word);
 	}
 	
 	/*
@@ -123,9 +215,7 @@ hashtable[])
 	// At last, return 1 (true)
 	else
 	{
-		int num_lines = 0;
-		//while (fscanf(file_ptr, "%s, %[^\n]", word) == 1)
-		while (fscanf(file_ptr, "%s", word) == 1)
+		while (fscanf(file_ptr, "%s, %[^\n]", word) == 1)
 		{
 			for (int i = 0; word[i]; i++)
 			{
@@ -153,54 +243,33 @@ hashtable[])
 				new_node->next = hashtable[bucket];
 				hashtable[bucket] = new_node;
 			}
-			num_lines++;
 		}
 	
 		
 		fclose(file_ptr);
-		//printf("number of lines: %d\n", num_lines);
 		return 1;
 	}
 }
 bool check_word(const char* word, hashmap_t hashtable[])
 {
+	int hashed_word = hash_function(word);
 	//printf("%s\n", word);
 	//make lowercase
-	char* original_case = malloc(strlen(word) + 1);
-	char* change_case = malloc(strlen(word) + 1);
-	//printf("created pointer for change cases\n");
-	strcpy(change_case, word);
-	strcpy(original_case, word);
-	//printf("Original = %s\n", original_case);
-	//printf("Changed = %s\n", change_case);
-	
-	int i = 0;
-	
-	while (change_case[i])
-	{
-		if (isupper(original_case[i]))
-		{
-			//printf("find upper case\n");
-			change_case[i] = tolower(original_case[i]);
-		}
-		else if (original_case == change_case)
-		{
+	char* change_case = word;
 
-		}
-		else
-		{
-			change_case[i] = original_case[i];
-		}
-		i++;
+	for (; *change_case; ++change_case)
+	{
+		//printf(word);
+		*change_case = tolower(*change_case);
 	}
 	
-	//printf("lowered to %s\n", change_case);
+	printf ("lowercase word: %s\n", word);
 	
-	int hashed_word = hash_function(change_case);
 	node* hashtable_cursor = hashtable[hashed_word];
 	while (hashtable_cursor != NULL)
 	{
-		if (strcmp(hashtable_cursor->word, change_case) == 0)
+		//printf("hashtable word: %s\n", hashtable_cursor->word);
+		if (strcmp(hashtable_cursor->word, word) == 0)
 		{
 			return 1;
 		}
@@ -209,10 +278,27 @@ bool check_word(const char* word, hashmap_t hashtable[])
 			hashtable_cursor = hashtable_cursor->next;
 		}
 	}
-	//printf("Misspelled word: %s\n", word);
-	free(original_case);
-	free(change_case);
+	printf("Misspelled word: %s\n", word);
 	return 0;
 }
 
-
+int main()
+{
+	hashmap_t hashtable[HASH_SIZE];
+    load_dictionary(DICTIONARY, hashtable);
+	/*
+    const char* correct_word = "Justice";
+    const char* punctuation_word_2 = "pl.ace";
+    printf("%d\n",check_word(correct_word, hashtable));
+    printf("%d\n",check_word(punctuation_word_2, hashtable));
+	*/
+	
+	
+	
+	char *misspelled[100];
+	FILE *fp = fopen("test1.txt", "r");
+	
+	int num_misspelled = check_words(fp, hashtable, misspelled);
+	printf("misspelled: %d\n", num_misspelled);
+	return 0;
+}
