@@ -2,7 +2,7 @@ os: windows
 language: c
 before_install:
   - test -n $CC && unset CC
-#install: make
+install: make
 <<<<<<< HEAD
 complier: gcc
 =======
