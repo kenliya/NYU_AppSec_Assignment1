@@ -195,7 +195,7 @@ bool check_word(const char* word, hashmap_t hashtable[])
 	}
 	//printf("Misspelled word: %s\n", word);
 	free(original_case);
-	free(change_case);
+	free(change_case); 
 	return 0;
 }
 
