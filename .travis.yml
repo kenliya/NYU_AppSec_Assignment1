@@ -2,4 +2,6 @@ os: linux
 language: c
 install: make
 complier: gcc 
-script: ./spell_check test1.txt
+script: 
+./spell_check test1.txt
+make
