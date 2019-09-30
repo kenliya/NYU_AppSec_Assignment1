@@ -1,0 +1,130 @@
+==717== Memcheck, a memory error detector
+==717== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==717== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==717== Command: ./spell_check test1.txt
+==717== Parent PID: 7
+==717== 
+==717== error calling PR_SET_PTRACER, vgdb might block
+==717== Conditional jump or move depends on uninitialised value(s)
+==717==    at 0x483DC58: strcspn (vg_replace_strmem.c:1736)
+==717==    by 0x48D1E94: strtok_r (strtok_r.c:64)
+==717==    by 0x109458: check_words (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==    by 0x1098EC: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==  Uninitialised value was created by a heap allocation
+==717==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==717==    by 0x1092C2: check_words (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==    by 0x1098EC: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717== 
+==717== Conditional jump or move depends on uninitialised value(s)
+==717==    at 0x48D1E9B: strtok_r (strtok_r.c:65)
+==717==    by 0x109458: check_words (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==    by 0x1098EC: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==  Uninitialised value was created by a heap allocation
+==717==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==717==    by 0x1092C2: check_words (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==    by 0x1098EC: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717== 
+==717== Conditional jump or move depends on uninitialised value(s)
+==717==    at 0x4838C78: strlen (vg_replace_strmem.c:461)
+==717==    by 0x109398: check_words (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==    by 0x1098EC: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==  Uninitialised value was created by a heap allocation
+==717==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==717==    by 0x1092C2: check_words (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==    by 0x1098EC: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717== 
+==717== Conditional jump or move depends on uninitialised value(s)
+==717==    at 0x4838DD0: strcpy (vg_replace_strmem.c:513)
+==717==    by 0x1093BB: check_words (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==    by 0x1098EC: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==  Uninitialised value was created by a heap allocation
+==717==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==717==    by 0x1092C2: check_words (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==    by 0x1098EC: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717== 
+==717== Conditional jump or move depends on uninitialised value(s)
+==717==    at 0x48D1E75: strtok_r (strtok_r.c:49)
+==717==    by 0x109458: check_words (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==    by 0x1098EC: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==  Uninitialised value was created by a heap allocation
+==717==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==717==    by 0x1092C2: check_words (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==    by 0x1098EC: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717== 
+==717== 
+==717== FILE DESCRIPTORS: 5 open at exit.
+==717== Open file descriptor 4: test1.txt
+==717==    at 0x49331AE: open (open64.c:48)
+==717==    by 0x48C4E51: _IO_file_open (fileops.c:189)
+==717==    by 0x48C4FFC: _IO_file_fopen@@GLIBC_2.2.5 (fileops.c:281)
+==717==    by 0x48B9158: __fopen_internal (iofopen.c:75)
+==717==    by 0x1098CB: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717== 
+==717== Open file descriptor 3: /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/valgrind_result4.txt
+==717==    <inherited from parent>
+==717== 
+==717== Open file descriptor 2: /dev/tty1
+==717==    <inherited from parent>
+==717== 
+==717== Open file descriptor 1: /dev/tty1
+==717==    <inherited from parent>
+==717== 
+==717== Open file descriptor 0: /dev/tty1
+==717==    <inherited from parent>
+==717== 
+==717== 
+==717== HEAP SUMMARY:
+==717==     in use at exit: 9,427,704 bytes in 168,398 blocks
+==717==   total heap usage: 168,409 allocs, 11 frees, 9,448,768 bytes allocated
+==717== 
+==717== 87 bytes in 19 blocks are definitely lost in loss record 1 of 8
+==717==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==717==    by 0x109717: check_word (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==    by 0x109421: check_words (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==    by 0x1098EC: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717== 
+==717== 87 bytes in 19 blocks are definitely lost in loss record 2 of 8
+==717==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==717==    by 0x109733: check_word (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==    by 0x109421: check_words (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==    by 0x1098EC: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717== 
+==717== 106 bytes in 22 blocks are definitely lost in loss record 3 of 8
+==717==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==717==    by 0x1093A4: check_words (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==    by 0x1098EC: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717== 
+==717== 552 bytes in 1 blocks are still reachable in loss record 4 of 8
+==717==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==717==    by 0x48B90FA: __fopen_internal (iofopen.c:65)
+==717==    by 0x1098CB: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717== 
+==717== 46,984 bytes in 839 blocks are indirectly lost in loss record 5 of 8
+==717==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==717==    by 0x1094D6: load_dictionary (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==    by 0x1098AE: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717== 
+==717== 65,016 bytes in 1,161 blocks are definitely lost in loss record 6 of 8
+==717==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==717==    by 0x1094D6: load_dictionary (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==    by 0x1098AE: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717== 
+==717== 9,267,888 bytes in 165,498 blocks are indirectly lost in loss record 7 of 8
+==717==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==717==    by 0x1095F2: load_dictionary (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==    by 0x1098AE: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717== 
+==717== 9,361,856 (46,984 direct, 9,314,872 indirect) bytes in 839 blocks are definitely lost in loss record 8 of 8
+==717==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==717==    by 0x1095F2: load_dictionary (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717==    by 0x1098AE: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==717== 
+==717== LEAK SUMMARY:
+==717==    definitely lost: 112,280 bytes in 2,060 blocks
+==717==    indirectly lost: 9,314,872 bytes in 166,337 blocks
+==717==      possibly lost: 0 bytes in 0 blocks
+==717==    still reachable: 552 bytes in 1 blocks
+==717==         suppressed: 0 bytes in 0 blocks
+==717== 
+==717== For lists of detected and suppressed errors, rerun with: -s
+==717== ERROR SUMMARY: 10 errors from 10 contexts (suppressed: 0 from 0)

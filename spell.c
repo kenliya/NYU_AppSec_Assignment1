@@ -67,13 +67,15 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
 				//increase num of misspelled
 				num_misspelled ++;
 			}
+			//free(word_wo_punc);
 			word = strtok (NULL, " \n\r");			
 		}
 	
 		//free(line);
-		//free(word);
+		free(word);
 	}
 	
+	free(line);
 	return num_misspelled;
 }
 

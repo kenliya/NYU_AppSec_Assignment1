@@ -1,0 +1,90 @@
+==222== Memcheck, a memory error detector
+==222== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==222== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==222== Command: ./spell_check test1.txt
+==222== Parent PID: 7
+==222== 
+==222== error calling PR_SET_PTRACER, vgdb might block
+==222== Conditional jump or move depends on uninitialised value(s)
+==222==    at 0x48D1E75: strtok_r (strtok_r.c:49)
+==222==    by 0x109365: check_words (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==222==    by 0x1097D3: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==222== 
+==222== 
+==222== FILE DESCRIPTORS: 5 open at exit.
+==222== Open file descriptor 4: test1.txt
+==222==    at 0x49331AE: open (open64.c:48)
+==222==    by 0x48C4E51: _IO_file_open (fileops.c:189)
+==222==    by 0x48C4FFC: _IO_file_fopen@@GLIBC_2.2.5 (fileops.c:281)
+==222==    by 0x48B9158: __fopen_internal (iofopen.c:75)
+==222==    by 0x1097B2: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==222== 
+==222== Open file descriptor 3: /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/valgrind_result.txt
+==222==    <inherited from parent>
+==222== 
+==222== Open file descriptor 2: /dev/tty1
+==222==    <inherited from parent>
+==222== 
+==222== Open file descriptor 1: /dev/tty1
+==222==    <inherited from parent>
+==222== 
+==222== Open file descriptor 0: /dev/tty1
+==222==    <inherited from parent>
+==222== 
+==222== 
+==222== HEAP SUMMARY:
+==222==     in use at exit: 7,017,038 bytes in 125,185 blocks
+==222==   total heap usage: 125,195 allocs, 10 frees, 7,029,910 bytes allocated
+==222== 
+==222== 87 bytes in 19 blocks are definitely lost in loss record 1 of 8
+==222==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==222==    by 0x1095F4: check_word (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==222==    by 0x10932E: check_words (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==222==    by 0x1097D3: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==222== 
+==222== 87 bytes in 19 blocks are definitely lost in loss record 2 of 8
+==222==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==222==    by 0x109610: check_word (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==222==    by 0x10932E: check_words (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==222==    by 0x1097D3: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==222== 
+==222== 552 bytes in 1 blocks are still reachable in loss record 3 of 8
+==222==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==222==    by 0x48B90FA: __fopen_internal (iofopen.c:65)
+==222==    by 0x1097B2: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==222== 
+==222== 8,192 bytes in 1 blocks are possibly lost in loss record 4 of 8
+==222==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==222==    by 0x1092B1: check_words (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==222==    by 0x1097D3: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==222== 
+==222== 12,152 bytes in 217 blocks are definitely lost in loss record 5 of 8
+==222==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==222==    by 0x1093CE: load_dictionary (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==222==    by 0x109795: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==222== 
+==222== 99,848 bytes in 1,783 blocks are indirectly lost in loss record 6 of 8
+==222==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==222==    by 0x1093CE: load_dictionary (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==222==    by 0x109795: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==222== 
+==222== 6,796,272 bytes in 121,362 blocks are indirectly lost in loss record 7 of 8
+==222==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==222==    by 0x1094CF: load_dictionary (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==222==    by 0x109795: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==222== 
+==222== 6,995,968 (99,848 direct, 6,896,120 indirect) bytes in 1,783 blocks are definitely lost in loss record 8 of 8
+==222==    at 0x483577F: malloc (vg_replace_malloc.c:309)
+==222==    by 0x1094CF: load_dictionary (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==222==    by 0x109795: main (in /mnt/c/Users/xkenn/OneDrive/Documents/NYU/AppSec/Assignments/Assignment1/NYU_AppSec_Assignment1/spell_check)
+==222== 
+==222== LEAK SUMMARY:
+==222==    definitely lost: 112,174 bytes in 2,038 blocks
+==222==    indirectly lost: 6,896,120 bytes in 123,145 blocks
+==222==      possibly lost: 8,192 bytes in 1 blocks
+==222==    still reachable: 552 bytes in 1 blocks
+==222==         suppressed: 0 bytes in 0 blocks
+==222== 
+==222== Use --track-origins=yes to see where uninitialised values come from
+==222== For lists of detected and suppressed errors, rerun with: -s
+==222== ERROR SUMMARY: 6 errors from 6 contexts (suppressed: 0 from 0)

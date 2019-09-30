@@ -1,0 +1,5 @@
+number of misspelled words: 3
+misspelled words are:
+sogn
+skyn
+betta
