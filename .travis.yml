@@ -3,5 +3,5 @@ language: c
 install: make
 complier: gcc 
 script: 
-./spell_check test1.txt
-make
+    - ./spell_check test1.txt
+    - make
