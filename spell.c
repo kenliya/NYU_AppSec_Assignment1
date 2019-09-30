@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -19,7 +20,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
 	
 	while (!feof(fp))
 	{
-		for (i =0; i< BUFSIZ && (((ch = fgetc(fp)) != EOF) && (ch != '\n')); i ++)
+		for (i =0; i< BUFSIZ && (((ch = fgetc(fp)) != EOF) && ((ch != '\n') || (ch !='\r'))); i ++)
 		{
 			//printf("ch = %d\n", ch);
 			line[i] = ch;
@@ -29,70 +30,49 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[])
 
 		char *word = NULL;
 		
-		word = strtok(line, " ,.-\n\r");
+		//word = strtok(line, " ,.-\n\r");
+		word = strtok(line, " \n\r");
 		
 		while (word != NULL)
 		{
 			//printf ("word from line: %s\n", word);
+			//Check punctuation at first and last character
+			char* word_wo_punc;
+			if (ispunct((unsigned int)* word))
+			{
+				//printf("first character is punct\n");
+				//printf("word without punc: %s\n", word + strlen(word) -1);
+				word_wo_punc = malloc(strlen(word));
+				strcpy(word_wo_punc, word+1);
+				//printf("word without punc: %s\n", word_wo_punc);
+			}
+			else
+			{
+				word_wo_punc = malloc(strlen(word)+1);
+				strcpy(word_wo_punc, word);
+			}
+			
+			if (ispunct((unsigned int)* (word_wo_punc + strlen(word_wo_punc) -1)))
+			{
+				//printf("last char is a punc\n");
+				word_wo_punc[strlen(word_wo_punc) - 1] = 0;
+			}
 			
 			//if it is misspelled
-			if (!check_word(word, hashtable))
+			if (!check_word(word_wo_punc, hashtable))
 			{
 				//append word to misspelled
-				misspelled[num_misspelled] = word;
+				misspelled[num_misspelled] = word_wo_punc;
 				
 				//increase num of misspelled
 				num_misspelled ++;
 			}
-			word = strtok (NULL, " ,.-\n\r");
+			word = strtok (NULL, " \n\r");			
 		}
 	
 		//free(line);
-		free(word);
+		//free(word);
 	}
-	
-	/*
-	while ((read = getline(&line, &len, fp))!= -1)
-	{
-		printf("Retrieved line of length %u :\n", read);
-		printf("%s", line);
-		
-		word = strtok(line, " ,.-");
-		
-		//printf("word from line: %s\n", word);
-		while (word!=NULL)
-		{
-			
-			printf ("word from line: %s\n", word);
-			//make lowercase
-			char* change_case = word;
-		
-			for (; *change_case; ++change_case)
-			{
-				//printf(word);
-				*change_case = tolower(*change_case);
-			}
-			
-			printf ("lowercase word: %s\n", word);
-			
-			//if it is misspelled
-			if (!check_word(word, hashtable))
-			{
-				//append word to misspelled
-				for (int i = 0; i < num_misspelled ; i++)
-				{
-					misspelled[i] = word;
-				}
-				//increase num of misspelled
-				num_misspelled ++;
-			}
-			word = strtok (NULL, " ,.-");
-		}
-		
-		free(line);
-		free(word);
-	}
-	*/
 	
 	return num_misspelled;
 }
@@ -113,8 +93,12 @@ hashtable[])
 	char word[LENGTH + 1];    // words from the wordlist
 	FILE* file_ptr;    // File Pointer for file open
 	//hashtable = NULL; // initialize hashtable
+	
 	file_ptr = fopen(dictionary_file, "r");    // Open wordlist.txt
 	// If wordlist.txt does not exist, return 0 (false)
+	
+	setvbuf ( file_ptr , NULL , _IOFBF , 128 );
+	
 	if (file_ptr == NULL)
 	{
 		return 0;
@@ -125,7 +109,7 @@ hashtable[])
 	{
 		int num_lines = 0;
 		//while (fscanf(file_ptr, "%s, %[^\n]", word) == 1)
-		while (fscanf(file_ptr, "%s", word) == 1)
+		while (fscanf(file_ptr, "%9s", word) == 1)
 		{
 			for (int i = 0; word[i]; i++)
 			{
@@ -164,7 +148,9 @@ hashtable[])
 }
 bool check_word(const char* word, hashmap_t hashtable[])
 {
-	//printf("%s\n", word);
+	//printf("Checking word: %s\n", word);
+	//if (ispunct((
+	//printf("word without punc: %s\n", word_wo_punc);
 	//make lowercase
 	char* original_case = malloc(strlen(word) + 1);
 	char* change_case = malloc(strlen(word) + 1);
@@ -182,10 +168,6 @@ bool check_word(const char* word, hashmap_t hashtable[])
 		{
 			//printf("find upper case\n");
 			change_case[i] = tolower(original_case[i]);
-		}
-		else if (original_case == change_case)
-		{
-
 		}
 		else
 		{
